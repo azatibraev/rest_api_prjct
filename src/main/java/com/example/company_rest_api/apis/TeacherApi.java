@@ -6,6 +6,7 @@ import com.example.company_rest_api.dto.response.TeacherResponse;
 import com.example.company_rest_api.services.CourseService;
 import com.example.company_rest_api.services.TeacherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,30 +29,35 @@ public class TeacherApi {
 
     //findAll
     @GetMapping("/findAll")
+    @PreAuthorize("hasAnyAuthority({'ADMIN', 'STUDENT','TEACHER'})")
     public List<TeacherResponse> findAllStudents() {
         return teacherService.findAllTeachers();
     }
 
     // findById
     @GetMapping("/find")
+    @PreAuthorize("hasAnyAuthority({'ADMIN', 'STUDENT','TEACHER'})")
     public TeacherResponse findById(@PathVariable Long teacherId) {
         return teacherService.findByTeacherId(teacherId);
     }
 
     //save
     @PostMapping("/save/{courseId}")
+    @PreAuthorize("hasAuthority({'ADMIN'})")
     public TeacherResponse save(@RequestBody TeacherRequest teacherRequest) {
         return teacherService.save(teacherRequest);
     }
 
     //delete
     @DeleteMapping("/delete/{teacherId}")
+    @PreAuthorize("hasAuthority({'ADMIN'})")
     public SimpleResponse deleteByTeacherId(@PathVariable Long teacherId) {
         return teacherService.deleteByTeacherId(teacherId);
     }
 
     //update
     @PutMapping("/update/{teacherId}")
+    @PreAuthorize("hasAuthority({'ADMIN'})")
     public TeacherResponse updateStudentById(@PathVariable Long teacherId,
                                      @RequestBody TeacherRequest teacherRequest) {
         return teacherService.updateTeacherById(teacherId,teacherRequest);

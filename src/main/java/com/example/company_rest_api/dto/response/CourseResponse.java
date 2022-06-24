@@ -1,17 +1,12 @@
 package com.example.company_rest_api.dto.response;
 
-import com.example.company_rest_api.models.Company;
 import com.example.company_rest_api.models.Course;
-import com.example.company_rest_api.models.Group;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +28,6 @@ public class CourseResponse {
 
     public CourseResponse() {
     }
-
     public static CourseResponse courseResponse(Course course) {
         CourseResponse courseResponse = new CourseResponse();
         courseResponse.setId(course.getId());

@@ -29,7 +29,7 @@ public class CompanyApi {
 
     //findAll
     @GetMapping
-    @PreAuthorize("hasAuthority({'ADMIN', 'STUDENT','TEACHER'})")
+    @PreAuthorize("hasAnyAuthority({'ADMIN', 'STUDENT','TEACHER'})")
     public List<CompanyResponse> findAllCompanies() {
         return companyService.findAllCompanies();
     }
@@ -37,7 +37,7 @@ public class CompanyApi {
 
     // findById
     @GetMapping("/find/{companyId}")
-    @PreAuthorize("hasAuthority({'ADMIN', 'STUDENT','TEACHER'})")
+    @PreAuthorize("hasAnyAuthority({'ADMIN', 'STUDENT','TEACHER'})")
     public CompanyResponse findById(@PathVariable Long companyId) {
         return companyService.findByCompanyId(companyId);
     }
